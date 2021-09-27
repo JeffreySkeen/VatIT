@@ -74,5 +74,22 @@ namespace VatIT.Controllers
                 return BadRequest(new ErrorResult("Something went wrong"));
             }
         }
+
+        [HttpDelete("todos/{id}")]
+        public ActionResult DeleteTodo(int id)
+        {
+            try
+            {
+                if (ToDos.Remove(id))
+                    return Ok();
+                else
+                    return NotFound(new ErrorResult("Cannot find ToDo with ID:" + id));
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ErrorResult("Something went wrong"));
+            }
+        }
     }
 }
