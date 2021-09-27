@@ -14,7 +14,7 @@ namespace VatIT.Controllers
     public class ToDoController : ControllerBase
     {
         // popultate Dictionary with data to work with
-        private static Dictionary<int, ToDo> ToDos = new Dictionary<int, ToDo>() {  { 1, new ToDo("Do Some Work", 1, false) }};
+        private static Dictionary<int, ToDo> ToDos = new Dictionary<int, ToDo>() { { 1, new ToDo("Do Some Work", 1, false) } };
 
         [HttpGet("todos")]
         public ActionResult<IList<ToDo>> GetTodos()
@@ -24,7 +24,7 @@ namespace VatIT.Controllers
                 var result = new GetTodosResult(ToDos.Values.Select(f => new Models.ToDo() { Completed = f.Completed, ID = f.ID, Name = f.Name }).ToList());
                 return Ok(result);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(new ErrorResult("Something went wrong"));
             }
@@ -45,9 +45,34 @@ namespace VatIT.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new ErrorResult("Something went wrong: "+ ex.Message));
+                return BadRequest(new ErrorResult("Something went wrong: " + ex.Message));
             }
         }
 
-       
+        [HttpPut("todos/{id}")]
+        public ActionResult<Models.ToDo> UpdateToDo([FromBody] Models.ToDo toDo, int id)
+        {
+            try
+            {
+                ToDo existingTodo;
+
+                if (!ToDos.TryGetValue(id, out existingTodo))
+                    return NotFound(new ErrorResult("Cannot find ToDo with ID:" + id));
+
+                existingTodo.Name = toDo.Name;
+                existingTodo.Completed = toDo.Completed;
+
+                return Ok(new Models.ToDo()
+                {
+                    ID = existingTodo.ID,
+                    Name = existingTodo.Name,
+                    Completed = existingTodo.Completed
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ErrorResult("Something went wrong"));
+            }
+        }
+    }
 }
