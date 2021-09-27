@@ -37,7 +37,7 @@ namespace VatIT.Controllers
                 if (ToDos.ContainsKey(toDo.ID))
                     return BadRequest(new ErrorResult("ToDo with ID " + toDo.ID + " already exists"));
 
-                if (toDo.Name.Equals("I'm lazy"))
+                if (toDo.Name =="I'm lazy")
                     throw new Exception("Name cannot be 'I'm lazy'.");
 
                 ToDos.Add(toDo.ID, ToDo.Create(toDo.Name, toDo.ID, toDo.Completed));
@@ -58,6 +58,9 @@ namespace VatIT.Controllers
 
                 if (!ToDos.TryGetValue(id, out existingTodo))
                     return NotFound(new ErrorResult("Cannot find ToDo with ID:" + id));
+
+                if(toDo.Name == "I'm lazy")
+                    throw new Exception("Name cannot be 'I'm lazy'.");
 
                 existingTodo.Name = toDo.Name;
                 existingTodo.Completed = toDo.Completed;
