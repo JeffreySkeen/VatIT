@@ -23,3 +23,4 @@ By default, on application start a single TODO is cached in memory.
 A browser window, ``https://localhost:8080/ToDo`` should popup automatically. If not you can just navigate to ``https://localhost:8080/ToDo``
 
 ## Design Choices and dependencies
+I used swaggerUI and postman to help speed up testing.
