@@ -7,19 +7,19 @@ namespace VatIT
 {
     public class ToDo
     {
-        private readonly int ID;
+        private readonly int id;
         private string name;
         private bool completed;
-        public ToDo(string name, int ID, bool completed)
+        public ToDo(string name, int id, bool completed)
         {
-            this.ID = ID;
+            this.id = id;
             this.name = name;
             this.completed = completed;
         }
 
         public static ToDo Create(string name, int ID, bool completed)
         {
-            return new ToDo(name,ID,completed);
+            return new ToDo(name, ID, completed);
         }
 
         public bool Completed
@@ -38,11 +38,19 @@ namespace VatIT
         {
             get
             {
-                return this.Name;
+                return this.name;
             }
             set
             {
                 this.name = value;
             }
         }
+        public int ID
+        {
+            get
+            {
+                return this.id;
+            }
+        }
+    }
 }

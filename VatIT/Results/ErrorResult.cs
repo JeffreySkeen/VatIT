@@ -7,13 +7,17 @@ using System.Threading.Tasks;
 namespace VatIT.Results
 {
     [DataContract]
-    public class GetTodosResult
-    { 
-        public GetTodosResult(IList<Models.ToDo> todos) 
+    public class ErrorResult
+    {
+        public ErrorResult(string message)
         {
-            ToDos = todos;
+            Message = message;
         }
+
         [DataMember]
-        public IList<Models.ToDo> ToDos { get; set; }
+        public string Message
+        {
+            get; set;
+        }
     }
 }
