@@ -42,7 +42,7 @@ namespace VatIT.Models
             }
             set
             {
-                this.name = value
+                this.name = value;
             }
         }
 }
